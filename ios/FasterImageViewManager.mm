@@ -10,14 +10,9 @@
 
 RCT_EXPORT_MODULE(FasterImageView)
 
-- (UIView *)view
-{
-  return [[UIView alloc] init];
-}
 
-RCT_CUSTOM_VIEW_PROPERTY(color, NSString, UIView)
-{
-  [view setBackgroundColor: [Utils hexStringToColor:json]];
-}
+RCT_EXPORT_VIEW_PROPERTY(source, NSObject)
+RCT_EXPORT_VIEW_PROPERTY(radius, NSFloat)
+RCT_EXPORT_VIEW_PROPERTY(tintColor, NSString)
 
 @end
