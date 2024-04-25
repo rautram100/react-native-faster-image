@@ -2,13 +2,14 @@ package com.fasterimage
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 
-class FasterImageView : View {
-  constructor(context: Context?) : super(context)
-  constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+
+class FasterImageView : AppCompatImageView{
+  constructor(context: Context?) : super(context!!)
+  constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs)
   constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-    context,
+    context!!,
     attrs,
     defStyleAttr
   )

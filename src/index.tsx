@@ -5,7 +5,7 @@ import { requireNativeComponent, type ViewProps } from 'react-native';
 
 // const LegacyFasterImageView = requireNativeComponent('LegacyFasterImageView');
 
-const isFabricEnabled = global.nativeFabricUIManager != null;
+const isFabricEnabled: boolean = global.nativeFabricUIManager != null;
 
 type SourceProps = {
   uri: string;
