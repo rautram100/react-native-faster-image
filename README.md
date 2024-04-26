@@ -6,31 +6,29 @@ Package for Faster image in React Native.
 
 Using npm
 
-```sh
-npm install react-native-faster-image
-```
+````sh
+npm install @rraut/react-native-faster-image
 
 using yarn
 
 ```sh
-yarn add react-native-faster-image
-```
-
+yarn add @rraut/react-native-faster-image
+````
 
 ## Usage
 
 ```js
-import { FasterImageView } from "react-native-faster-image";
+import { FasterImageView } from 'react-native-faster-image';
 
 // ...
 
 <FasterImageView
   source={{
-          uri: 'https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff',
-        }}
+    uri: 'https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff',
+  }}
   style={styles.image}
   radius={100}
-/>
+/>;
 ```
 
 ## Contributing
