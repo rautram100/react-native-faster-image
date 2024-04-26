@@ -1,24 +1,22 @@
 # react-native-faster-image
 
-Package for Faster image in React Native.
+FasterImageView is a wrapper around [SDWebImage] (https://github.com/SDWebImage/SDWebImage) and [Glide] (https://github.com/bumptech/glide) for efficient image rendering and caching purposes. It supports both old and new React Native architecture. 
+
+## Motivation
+We already have [react-native-fast-image] (https://github.com/DylanVann/react-native-fast-image) package for exactly the same reason but since the project seems to have been abandoned, I have been facing some issues with this library. Knowing that this library will not get any new updates, Me with my some friends started to build this package with the plan to support both the New and old architecture. This release just have bare minimum features with the first release only supports the uri, tintColor, borderRadius and compiled images. We have further plan to support webP, gif, image with headers, caching strategy and many more. 
 
 ## Installation
 
-Using npm
-
 ````sh
-npm install @rraut/react-native-faster-image
-
-using yarn
-
-```sh
 yarn add @rraut/react-native-faster-image
+cd ios && pod install
+
 ````
 
 ## Usage
 
 ```js
-import { FasterImageView } from 'react-native-faster-image';
+import { FasterImageView } from '@rraut/react-native-faster-image';
 
 // ...
 
