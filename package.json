@@ -1,5 +1,5 @@
 {
-  "name": "react-native-faster-image",
+  "name": "@rraut/react-native-faster-image",
   "version": "0.1.0",
   "description": "Package for Faster image in React Native.",
   "main": "lib/commonjs/index",
