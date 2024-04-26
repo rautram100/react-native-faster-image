@@ -8,20 +8,20 @@ export default function App() {
     <View style={styles.container}>
       <FasterImageView
         source={{
-          uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+          uri: 'https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff',
         }}
         style={styles.image}
         radius={100}
       />
 
       <Text>Hello</Text>
-      {/* <FasterImageView
+      <FasterImageView
         source={{
-          uri: 'filterleft',
+          uri: 'funnel',
         }}
         style={styles.image2}
         tintColor={'#f86b17'}
-      /> */}
+      />
     </View>
   );
 }
@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato',
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 200,
+    width: 200,
     backgroundColor: 'tomato',
   },
   image2: {
-    height: 50,
-    width: 50,
+    height: 200,
+    width: 200,
   },
 });
