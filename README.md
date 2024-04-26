@@ -1,9 +1,9 @@
 # react-native-faster-image
 
-FasterImageView is a wrapper around [SDWebImage] (https://github.com/SDWebImage/SDWebImage) and [Glide] (https://github.com/bumptech/glide) for efficient image rendering and caching purposes. It supports both old and new React Native architecture. 
+FasterImageView is a wrapper around [SDWebImage](https://github.com/SDWebImage/SDWebImage) and [Glide](https://github.com/bumptech/glide) for efficient image rendering and caching purposes. It supports both old and new React Native architecture. 
 
 ## Motivation
-We already have [react-native-fast-image] (https://github.com/DylanVann/react-native-fast-image) package for exactly the same reason but since the project seems to have been abandoned, I have been facing some issues with this library. Knowing that this library will not get any new updates, Me with my some friends started to build this package with the plan to support both the New and old architecture. This release just have bare minimum features with the first release only supports the uri, tintColor, borderRadius and compiled images. We have further plan to support webP, gif, image with headers, caching strategy and many more. 
+We already have [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) package for exactly the same reason but since the project seems to have been abandoned, I have been facing some issues with this library. Knowing that this library will not get any new updates, Me with my some friends started to build this package with the plan to support both the New and old architecture. This release just have bare minimum features with the first release only supports the uri, tintColor, borderRadius and compiled images. We have further plan to support webP, gif, image with headers, caching strategy and many more. 
 
 ## Installation
 
@@ -28,6 +28,18 @@ import { FasterImageView } from '@rraut/react-native-faster-image';
   radius={100}
 />;
 ```
+
+## Features
+
+-   [x] Aggressively cache images.
+-   [x] Border Radius
+-   [ ] Add authorization headers.
+-   [ ] Prioritize images.
+-   [ ] Preload images.
+-   [ ] GIF support.
+-   [ ] Animated Image Transition while image loading
+-   [ ] BlurHash Support
+
 
 ## Contributing
 
