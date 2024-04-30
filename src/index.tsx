@@ -7,14 +7,24 @@ import { requireNativeComponent, type ViewProps } from 'react-native';
 
 const isFabricEnabled: boolean = global.nativeFabricUIManager != null;
 
+type headersType = {
+  Authorization: string;
+};
+
 type SourceProps = {
   uri: string;
+  headers?: headersType;
+  isBase64?: boolean;
+  isGIF?: boolean;
 };
+
+export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
 
 interface ImageProps extends ViewProps {
   source: SourceProps;
   tintColor?: string;
   radius?: number;
+  resizeMode?: ResizeMode;
 }
 
 const ImageView = isFabricEnabled
