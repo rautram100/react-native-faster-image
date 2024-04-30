@@ -32,5 +32,9 @@ const ImageView = isFabricEnabled
   : requireNativeComponent<ImageProps>('LegacyFasterImageView');
 
 export const FasterImageView: React.FC<ImageProps> = (props) => {
+  const { source } = props;
+  source.isBase64 = source.isBase64 || false;
+  source.isGIF = source.isGIF || false;
+  props.source = source;
   return <ImageView {...props} />;
 };

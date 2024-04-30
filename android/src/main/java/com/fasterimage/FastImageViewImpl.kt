@@ -1,6 +1,7 @@
 package com.fasterimage
 
 import android.graphics.Color
+import android.util.Base64
 import android.webkit.URLUtil
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -9,25 +10,44 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 
 
+
 class FastImageViewImpl(themedReactContext: ReactApplicationContext) {
   private val reactContext:ReactApplicationContext = themedReactContext;
   private lateinit var requestManager: RequestManager
 
   public fun setSource(view: FasterImageView, value: ReadableMap) {
     val imageUrl: String? = value.getString("uri")
+    requestManager = Glide.with(reactContext)
+    view.adjustViewBounds = true
+    view.scaleType = ImageView.ScaleType.CENTER_CROP
     if(URLUtil.isValidUrl(imageUrl)) {
-      view.adjustViewBounds = true
-      view.scaleType = ImageView.ScaleType.CENTER_CROP
-      requestManager = Glide.with(reactContext)
-      requestManager
-        .load(imageUrl)
-        .into(view)
+      val isGIF: Boolean = value.getBoolean("isGIF")
+       if(isGIF) {
+        requestManager
+          .asGif()
+          .load(imageUrl)
+          .into(view)
+      }
+      else {
+         requestManager
+           .load(imageUrl)
+           .into(view)
+       }
     }
     else {
-      val pathUrl: String = "@drawable/$imageUrl"
-      val packageName = reactContext.packageName;
-      val imageResource = reactContext.resources.getIdentifier(pathUrl, null, packageName)
-      view.setImageResource(imageResource)
+      val isBase64: Boolean = value.getBoolean("isBase64")
+      if(isBase64) {
+        requestManager
+          .asBitmap()
+          .load(Base64.decode(imageUrl, Base64.DEFAULT))
+          .into(view)
+      }
+      else {
+        val pathUrl: String = "@drawable/$imageUrl"
+        val packageName = reactContext.packageName;
+        val imageResource = reactContext.resources.getIdentifier(pathUrl, null, packageName)
+        view.setImageResource(imageResource)
+      }
     }
   }
 

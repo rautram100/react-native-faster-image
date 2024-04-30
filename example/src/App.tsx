@@ -10,6 +10,7 @@ export default function App() {
           uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
         }}
         style={styles.image}
+        resizeMode="contain"
       />
     </View>
   );
