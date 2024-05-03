@@ -30,9 +30,14 @@ class FasterImageViewManager(private val reactContext: ReactApplicationContext):
   }
 
   @ReactProp(name="radius")
-  fun setRadius(view: FasterImageView, value: Float?) {
-    if(value != null) {
+  fun setRadius(view: FasterImageView, value: Float) {
       fastImageViewImpl.setRadius(view, value)
+  }
+
+  @ReactProp(name="resizeMode")
+  fun setResizeMode(view: FasterImageView, value: String?) {
+    if(value != null) {
+      fastImageViewImpl.setResizeMode(view, value)
     }
   }
 

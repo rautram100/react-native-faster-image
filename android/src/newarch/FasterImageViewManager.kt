@@ -43,4 +43,10 @@ class FasterImageViewManager(private val reactApplicationContext: ReactApplicati
     }
   }
 
+  @ReactProp(name="resizeMode")
+  override fun setResizeMode(view: FasterImageView?, value: String?) {
+    if(value != null && view != null) {
+      fastImageViewImpl.setResizeMode(view, value)
+    }
+  }
 }

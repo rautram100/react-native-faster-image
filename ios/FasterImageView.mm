@@ -32,6 +32,8 @@ using namespace facebook::react;
     _imageView = [[UIImageView alloc] init];
     _imageView.clipsToBounds = YES;
     _imageView.layer.masksToBounds = YES;
+     
+      _imageView.contentMode = UIViewContentModeScaleToFill;
     self.contentView = _imageView;
   }
 
@@ -44,12 +46,13 @@ using namespace facebook::react;
     const auto &newViewProps = *std::static_pointer_cast<FasterImageViewProps const>(props);
 
     if (oldViewProps.source.uri != newViewProps.source.uri) {
-//        NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
-//        [_view setBackgroundColor: [Utils hexStringToColor:colorToConvert]];
         NSString *stringURL = [[NSString alloc] initWithCString: newViewProps.source.uri.c_str() encoding: NSASCIIStringEncoding];
         NSURL *url = [NSURL URLWithString: stringURL];
-        if(url && [url scheme] && [url host]) {
-            [_imageView sd_setImageWithURL: url];
+        BOOL isBase64 = newViewProps.source.isBase64;
+         if((url && [url scheme] && [url host]) || isBase64) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self->_imageView sd_setImageWithURL: url];
+             });
         }
         else {
             if(oldViewProps.tintColor != newViewProps.tintColor) {
@@ -61,11 +64,31 @@ using namespace facebook::react;
                 _imageView.image = [UIImage imageNamed: stringURL];
             }
         }
+        
     }
     
     if (oldViewProps.radius != newViewProps.radius) {
         _imageView.layer.cornerRadius = newViewProps.radius;
     }
+    
+    if (oldViewProps.resizeMode != newViewProps.resizeMode) {
+        NSString *resizeMode =  [[NSString alloc] initWithUTF8String: newViewProps.resizeMode.c_str()];
+        if([resizeMode isEqualToString: @"contain"]) {
+            _imageView.contentMode = UIViewContentModeScaleAspectFill;
+           
+        }
+        else if([resizeMode isEqualToString: @"stretch"]) {
+            _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        }
+        else if([resizeMode isEqualToString: @"center"]) {
+            _imageView.contentMode = UIViewContentModeCenter;
+        }
+        else {
+            _imageView.contentMode = UIViewContentModeScaleToFill;
+        }
+    }
+    
+    
     [super updateProps:props oldProps:oldProps];
 }
 

@@ -29,10 +29,51 @@ import { FasterImageView } from '@rraut/react-native-faster-image';
 />;
 ```
 
+## GIF Support
+
+You have pass isGIF parameter inside source props to render the GIF Image
+
+```js
+import { FasterImageView } from '@rraut/react-native-faster-image';
+
+// ...
+
+<FasterImageView
+  source={{
+    uri: 'https://www.adorama.com/alc/wp-content/uploads/2021/05/bird-wings-flying.gif',
+    isGIF: true
+  }}
+  style={styles.image}
+/>;
+```
+
+## Base64 Image format support
+Just as on GIF you have to pass isBase64 parameter inside the source url to render the image of base64 format.
+
+```js
+import { FasterImageView } from '@rraut/react-native-faster-image';
+
+// ...
+
+<FasterImageView
+  source={{
+    uri: 'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC',
+    isBase64: true
+  }}
+  style={styles.image}
+/>;
+```
+
+## Why radius props ?
+react-native-faster-image directly exposes the platform specific ImageView rather than the ImageView wrapped inside the UIView. Because of this borderRadius style applied on the ImageView will not work and you have to pass extra radius props. The radius props will apply border radius to all four corners of the image and this library currently doesn't support border radius for indivisual corners for now. This will soon change as we are working on this feature.
+
+
 ## Features
 
 -   [x] Aggressively cache images.
 -   [x] Border Radius
+-   [x] GIF support
+-   [x] Base64 Image format suuport
 -   [ ] Add authorization headers.
 -   [ ] Prioritize images.
 -   [ ] Preload images.
