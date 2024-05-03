@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FasterImageView } from '@rraut/react-native-faster-image';
+import { FasterImageView } from 'react-native-faster-image';
 
 export default function App() {
   return (
