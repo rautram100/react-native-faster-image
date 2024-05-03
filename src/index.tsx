@@ -33,8 +33,15 @@ const ImageView = isFabricEnabled
 
 export const FasterImageView: React.FC<ImageProps> = (props) => {
   const { source } = props;
-  source.isBase64 = source.isBase64 || false;
   source.isGIF = source.isGIF || false;
+  if (source.isBase64 !== undefined && source.isBase64) {
+    let { uri } = source;
+    uri = `data:image/png;base64,${uri}`;
+    source.uri = uri;
+  } else {
+    source.isBase64 = false;
+  }
   props.source = source;
+
   return <ImageView {...props} />;
 };

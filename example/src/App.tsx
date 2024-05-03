@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FasterImageView } from 'react-native-faster-image';
+import { FasterImageView } from '@rraut/react-native-faster-image';
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <View style={styles.image} />
       <FasterImageView
         source={{
-          uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBNXZmD93vvtMUrq4J8Ahrxi0lpGXN1kUrTyGdm7wmqw&s',
         }}
         style={styles.image}
-        resizeMode="contain"
       />
     </View>
   );
@@ -19,19 +19,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-    backgroundColor: 'tomato',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   image: {
     width: 200,
     height: 150,
-  },
-  image2: {
-    height: 200,
-    width: 400,
+    backgroundColor: 'tomato',
   },
 });

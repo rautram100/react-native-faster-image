@@ -36,12 +36,15 @@ RCT_CUSTOM_VIEW_PROPERTY(source, NSDictionary, UIImageView) {
     view.layer.masksToBounds = YES;
     NSString *stringURL = json[@"uri"];
     NSURL *url = [NSURL URLWithString: stringURL];
-    if(url && [url scheme] && [url host]) {
+    BOOL isBase64 = json[@"isBase64"];
+    if((url && [url scheme] && [url host]) || isBase64) {
         [view sd_setImageWithURL: url];
     }
     else {
         view.image = [[UIImage imageNamed: stringURL] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
     }
+    view.contentMode = UIViewContentModeScaleToFill;
+    
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(tintColor, NSString, UIImageView) {
@@ -52,6 +55,21 @@ RCT_CUSTOM_VIEW_PROPERTY(radius, NSCFNumber, UIImageView) {
     NSNumber *myNumber = json;
     double value = fabs(myNumber.doubleValue);
     view.layer.cornerRadius = value;
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(resizeMode, NSString, UIImageView) {
+    if([json isEqualToString: @"contain"]) {
+        view.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    else if([json isEqualToString: @"stretch"]) {
+        view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    else if([json isEqualToString: @"center"]) {
+        view.contentMode = UIViewContentModeCenter;
+    }
+    else {
+        view.contentMode = UIViewContentModeScaleToFill;
+    }
 }
 
 @end
