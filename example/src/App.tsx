@@ -5,10 +5,31 @@ import { FasterImageView } from 'react-native-faster-image';
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.image} />
       <FasterImageView
         source={{
-          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBNXZmD93vvtMUrq4J8Ahrxi0lpGXN1kUrTyGdm7wmqw&s',
+          uri: 'https://merisangini.sujandhakal0.com.np/storage/product/657c797e33a78.jpg',
+        }}
+        style={styles.image}
+        radius={100}
+      />
+      <FasterImageView
+        source={{
+          uri: 'filterleft',
+          tintColor: '#f86b17',
+        }}
+        style={styles.left}
+      />
+      <FasterImageView
+        source={{
+          uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC',
+          isBase64: true,
+        }}
+        style={styles.left}
+      />
+      <FasterImageView
+        source={{
+          uri: 'https://www.adorama.com/alc/wp-content/uploads/2021/05/bird-wings-flying.gif',
+          isGIF: true,
         }}
         style={styles.image}
       />
@@ -19,12 +40,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: 200,
-    height: 150,
-    backgroundColor: 'tomato',
+    height: 200,
+  },
+  left: {
+    height: 50,
+    width: 50,
   },
 });

@@ -32,8 +32,6 @@ using namespace facebook::react;
     _imageView = [[UIImageView alloc] init];
     _imageView.clipsToBounds = YES;
     _imageView.layer.masksToBounds = YES;
-     
-      _imageView.contentMode = UIViewContentModeScaleToFill;
     self.contentView = _imageView;
   }
 

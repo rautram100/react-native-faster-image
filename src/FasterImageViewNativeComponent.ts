@@ -11,14 +11,13 @@ type SourceProps = {
   headers?: headersType;
   isBase64?: boolean;
   isGIF?: boolean;
+  tintColor?: string;
+  resizeMode?: string;
 };
 
 interface NativeProps extends ViewProps {
-  color?: string;
   source?: SourceProps;
   radius?: Float;
-  tintColor?: string;
-  resizeMode?: string;
 }
 
 export default codegenNativeComponent<NativeProps>('FasterImageView');
