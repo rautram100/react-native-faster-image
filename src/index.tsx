@@ -36,6 +36,13 @@ export class FasterImageView extends React.Component<FasterImageProps> {
     super(props);
   }
   render(): React.ReactNode {
-    return <ImageView {...this.props} />;
+    const newProps = { ...this.props };
+    if (newProps.source.isGIF === undefined) {
+      newProps.source.isGIF = false;
+    }
+    if (newProps.source.isBase64 === undefined) {
+      newProps.source.isBase64 = false;
+    }
+    return <ImageView {...newProps} />;
   }
 }

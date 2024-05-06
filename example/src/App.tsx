@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FasterImageView } from 'react-native-faster-image';
+import { FasterImageView } from '@rraut/react-native-faster-image';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <FasterImageView
         source={{
-          uri: 'https://merisangini.sujandhakal0.com.np/storage/product/657c797e33a78.jpg',
+          uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
         }}
         style={styles.image}
-        radius={100}
       />
       <FasterImageView
         source={{
           uri: 'filterleft',
-          tintColor: '#f86b17',
         }}
         style={styles.left}
       />
@@ -31,7 +29,7 @@ export default function App() {
           uri: 'https://www.adorama.com/alc/wp-content/uploads/2021/05/bird-wings-flying.gif',
           isGIF: true,
         }}
-        style={styles.image}
+        style={styles.image2}
       />
     </View>
   );
@@ -45,10 +43,14 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 200,
-    height: 200,
+    height: 100,
   },
   left: {
     height: 50,
     width: 50,
+  },
+  image2: {
+    height: 150,
+    width: 300,
   },
 });
