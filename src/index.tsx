@@ -7,41 +7,42 @@ import { requireNativeComponent, type ViewProps } from 'react-native';
 
 const isFabricEnabled: boolean = global.nativeFabricUIManager != null;
 
-type headersType = {
+export type headersType = {
   Authorization: string;
 };
 
-type SourceProps = {
+export type SourceProps = {
   uri: string;
   headers?: headersType;
   isBase64?: boolean;
   isGIF?: boolean;
+  tintColor?: string;
+  resizeMode?: ResizeMode;
 };
 
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
 
-interface ImageProps extends ViewProps {
+export interface FasterImageProps extends ViewProps {
   source: SourceProps;
-  tintColor?: string;
   radius?: number;
-  resizeMode?: ResizeMode;
 }
 
 const ImageView = isFabricEnabled
   ? require('./FasterImageViewNativeComponent').default
-  : requireNativeComponent<ImageProps>('LegacyFasterImageView');
+  : requireNativeComponent<FasterImageProps>('LegacyFasterImageView');
 
-export const FasterImageView: React.FC<ImageProps> = (props) => {
-  const { source } = props;
-  source.isGIF = source.isGIF || false;
-  if (source.isBase64 !== undefined && source.isBase64) {
-    let { uri } = source;
-    uri = `data:image/png;base64,${uri}`;
-    source.uri = uri;
-  } else {
-    source.isBase64 = false;
+export class FasterImageView extends React.Component<FasterImageProps> {
+  constructor(props: FasterImageProps) {
+    super(props);
   }
-  props.source = source;
-
-  return <ImageView {...props} />;
-};
+  render(): React.ReactNode {
+    const newProps = { ...this.props };
+    if (newProps.source.isGIF === undefined) {
+      newProps.source.isGIF = false;
+    }
+    if (newProps.source.isBase64 === undefined) {
+      newProps.source.isBase64 = false;
+    }
+    return <ImageView {...newProps} />;
+  }
+}

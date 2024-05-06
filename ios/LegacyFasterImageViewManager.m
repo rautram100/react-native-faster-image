@@ -36,40 +36,47 @@ RCT_CUSTOM_VIEW_PROPERTY(source, NSDictionary, UIImageView) {
     view.layer.masksToBounds = YES;
     NSString *stringURL = json[@"uri"];
     NSURL *url = [NSURL URLWithString: stringURL];
-    BOOL isBase64 = json[@"isBase64"];
-    if((url && [url scheme] && [url host]) || isBase64) {
-        [view sd_setImageWithURL: url];
+    BOOL isBase64 = [[json objectForKey:@"isBase64"] boolValue];
+    BOOL isGIF = [[json objectForKey:@"isGIF"] boolValue];
+    NSString *tintColor = json[@"tintColor"];
+    NSString *resizeMode = json[@"resizeMode"];
+    if(isBase64 || isGIF) {
+       [view sd_setImageWithURL: url];
+   }
+    else if((url && [url scheme] && [url host])) {
+        if(tintColor == nil) {
+            [view sd_setImageWithURL: url];
+        }
+        else {
+            [view sd_setImageWithURL: url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                UIColor *color = [Utils hexStringToColor: tintColor];
+                UIImage *newImage = [Utils getImageWithTintColor:image :color];
+                view.image = newImage;
+            }];
+        }
+        if(resizeMode != nil) {
+            view.contentMode = [Utils getUIImageContentMode: resizeMode];
+        }
     }
     else {
-        view.image = [[UIImage imageNamed: stringURL] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
+        if(tintColor == nil) {
+            view.image = [UIImage imageNamed: stringURL];
+        }
+        else {
+            UIImage *image = [UIImage imageNamed: stringURL];
+            UIColor *color = [Utils hexStringToColor: tintColor];
+            UIImage *newImage = [Utils getImageWithTintColor:image :color];
+            view.image = newImage;
+        }
     }
-    view.contentMode = UIViewContentModeScaleToFill;
     
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(tintColor, NSString, UIImageView) {
-    [view setTintColor: [Utils hexStringToColor: json]];
-}
 
 RCT_CUSTOM_VIEW_PROPERTY(radius, NSCFNumber, UIImageView) {
     NSNumber *myNumber = json;
     double value = fabs(myNumber.doubleValue);
     view.layer.cornerRadius = value;
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(resizeMode, NSString, UIImageView) {
-    if([json isEqualToString: @"contain"]) {
-        view.contentMode = UIViewContentModeScaleAspectFill;
-    }
-    else if([json isEqualToString: @"stretch"]) {
-        view.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    else if([json isEqualToString: @"center"]) {
-        view.contentMode = UIViewContentModeCenter;
-    }
-    else {
-        view.contentMode = UIViewContentModeScaleToFill;
-    }
 }
 
 @end

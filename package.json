@@ -1,6 +1,6 @@
 {
   "name": "@rraut/react-native-faster-image",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Package for Faster image in React Native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -37,13 +37,16 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "fast-image",
+    "Glide",
+    "SdWebImage"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rautram100/react-native-faster-image.git"
   },
-  "author": "Ram Raut <rraut@deerhold.org> (https://github.com/rautram100)",
+  "author": "Ram Raut <ramraut10@gmail.com> (https://github.com/rautram100)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rautram100/react-native-faster-image/issues"

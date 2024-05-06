@@ -32,8 +32,6 @@ using namespace facebook::react;
     _imageView = [[UIImageView alloc] init];
     _imageView.clipsToBounds = YES;
     _imageView.layer.masksToBounds = YES;
-     
-      _imageView.contentMode = UIViewContentModeScaleToFill;
     self.contentView = _imageView;
   }
 
@@ -45,50 +43,57 @@ using namespace facebook::react;
     const auto &oldViewProps = *std::static_pointer_cast<FasterImageViewProps const>(_props);
     const auto &newViewProps = *std::static_pointer_cast<FasterImageViewProps const>(props);
 
-    if (oldViewProps.source.uri != newViewProps.source.uri) {
+    if (
+        (oldViewProps.source.uri != newViewProps.source.uri) ||
+        (oldViewProps.source.tintColor != newViewProps.source.tintColor) ||
+        (oldViewProps.source.resizeMode != newViewProps.source.resizeMode) ||
+        (oldViewProps.source.isGIF != newViewProps.source.isGIF) ||
+        (oldViewProps.source.isBase64 != newViewProps.source.isBase64)
+        ) {
         NSString *stringURL = [[NSString alloc] initWithCString: newViewProps.source.uri.c_str() encoding: NSASCIIStringEncoding];
         NSURL *url = [NSURL URLWithString: stringURL];
-        BOOL isBase64 = newViewProps.source.isBase64;
-         if((url && [url scheme] && [url host]) || isBase64) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [self->_imageView sd_setImageWithURL: url];
-             });
+        NSString *tintColor = [[NSString alloc] initWithCString: newViewProps.source.tintColor.c_str() encoding: NSASCIIStringEncoding];
+        NSString *resizeMode = [[NSString alloc] initWithCString: newViewProps.source.resizeMode.c_str() encoding: NSASCIIStringEncoding];
+        Boolean isBase64 = newViewProps.source.isBase64;
+        Boolean isGIF = newViewProps.source.isGIF;
+        if(isBase64 || isGIF) {
+            [_imageView sd_setImageWithURL: url];
         }
-        else {
-            if(oldViewProps.tintColor != newViewProps.tintColor) {
-                NSString *colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.tintColor.c_str()];
-                _imageView.image = [[UIImage imageNamed: stringURL] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
-                [_imageView setTintColor: [Utils hexStringToColor: colorToConvert]];
+        else if((url && [url scheme] && [url host])) {
+            if([tintColor length] == 0) {
+                [_imageView sd_setImageWithURL: url];
             }
             else {
+                [_imageView sd_setImageWithURL: url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    UIColor *color = [Utils hexStringToColor: tintColor];
+                    UIImage *newImage = [Utils getImageWithTintColor:image :color];
+                    self-> _imageView.image = newImage;
+                }];
+            }
+        }
+        else {
+            if([tintColor length] == 0) {
                 _imageView.image = [UIImage imageNamed: stringURL];
+            }
+            else {
+                UIImage *image = [UIImage imageNamed: stringURL];
+                UIColor *color = [Utils hexStringToColor: tintColor];
+                UIImage *newImage = [Utils getImageWithTintColor:image :color];
+                _imageView.image = newImage;
             }
         }
         
+        if([resizeMode length] > 0) {
+            _imageView.contentMode = [Utils getUIImageContentMode: resizeMode];
+        }
+        else {
+            _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        }
+        
     }
-    
     if (oldViewProps.radius != newViewProps.radius) {
         _imageView.layer.cornerRadius = newViewProps.radius;
     }
-    
-    if (oldViewProps.resizeMode != newViewProps.resizeMode) {
-        NSString *resizeMode =  [[NSString alloc] initWithUTF8String: newViewProps.resizeMode.c_str()];
-        if([resizeMode isEqualToString: @"contain"]) {
-            _imageView.contentMode = UIViewContentModeScaleAspectFill;
-           
-        }
-        else if([resizeMode isEqualToString: @"stretch"]) {
-            _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        }
-        else if([resizeMode isEqualToString: @"center"]) {
-            _imageView.contentMode = UIViewContentModeCenter;
-        }
-        else {
-            _imageView.contentMode = UIViewContentModeScaleToFill;
-        }
-    }
-    
-    
     [super updateProps:props oldProps:oldProps];
 }
 

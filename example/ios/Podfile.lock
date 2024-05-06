@@ -955,7 +955,7 @@ PODS:
   - React-Mapbuffer (0.73.6):
     - glog
     - React-debug
-  - react-native-faster-image (0.1.0):
+  - react-native-faster-image (0.1.2):
     - glog
     - hermes-engine
     - RCT-Folly (= 2022.05.16.00)
@@ -1440,7 +1440,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 4fed160d939e93a39049481f47744af246a7ac2c
   React-logger: 3eb80a977f0d9669468ef641a5e1fabbc50a09ec
   React-Mapbuffer: 84ea43c6c6232049135b1550b8c60b2faac19fab
-  react-native-faster-image: c3cef384bc1a638c9fedbef061e7984ac3e3098c
+  react-native-faster-image: 3f895f2067079e7f5a92108e528291ccd5578985
   React-nativeconfig: b4d4e9901d4cabb57be63053fd2aa6086eb3c85f
   React-NativeModulesApple: cd26e56d56350e123da0c1e3e4c76cb58a05e1ee
   React-perflogger: 5f49905de275bac07ac7ea7f575a70611fa988f2

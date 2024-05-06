@@ -64,6 +64,23 @@ import { FasterImageView } from '@rraut/react-native-faster-image';
 />;
 ```
 
+## Image Resize Mode
+Same as the default Image component, FasterImageView supports "contain", "cover", "stretch", "center" as the image resize Mode
+
+```js
+import { FasterImageView } from '@rraut/react-native-faster-image';
+
+// ...
+
+<FasterImageView
+  source={{
+    uri: 'https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff',
+    resizeMode: "contain"
+  }}
+  style={styles.image}
+/>;
+```
+
 ## Why radius props ?
 react-native-faster-image directly exposes the platform specific ImageView rather than the ImageView wrapped inside the UIView. Because of this borderRadius style applied on the ImageView will not work and you have to pass extra radius props. The radius props will apply border radius to all four corners of the image and this library currently doesn't support border radius for indivisual corners for now. This will soon change as we are working on this feature.
 
@@ -76,8 +93,9 @@ react-native-faster-image directly exposes the platform specific ImageView rathe
 -   [x] Base64 Image format suuport
 -   [ ] Add authorization headers.
 -   [ ] Prioritize images.
+-   [ ] Image Load/Error/Completed Events
+-   [ ] Bridgeless Mode Support
 -   [ ] Preload images.
--   [ ] GIF support.
 -   [ ] Animated Image Transition while image loading
 -   [ ] BlurHash Support
 

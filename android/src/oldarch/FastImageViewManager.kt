@@ -22,23 +22,8 @@ class FasterImageViewManager(private val reactContext: ReactApplicationContext):
     fastImageViewImpl.setSource(view, value)
   }
 
-  @ReactProp(name="tintColor")
-  fun setTintColor(view: FasterImageView, value: String?) {
-    if(value != null) {
-      fastImageViewImpl.setTintColor(view, value)
-    }
-  }
-
   @ReactProp(name="radius")
   fun setRadius(view: FasterImageView, value: Float) {
       fastImageViewImpl.setRadius(view, value)
   }
-
-  @ReactProp(name="resizeMode")
-  fun setResizeMode(view: FasterImageView, value: String?) {
-    if(value != null) {
-      fastImageViewImpl.setResizeMode(view, value)
-    }
-  }
-
 }

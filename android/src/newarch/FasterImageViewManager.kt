@@ -20,9 +20,6 @@ class FasterImageViewManager(private val reactApplicationContext: ReactApplicati
    return FasterImageView(p0)
   }
 
-  override fun setColor(view: FasterImageView?, value: String?) {
-   //
-  }
   @ReactProp(name="source")
   override fun setSource(view: FasterImageView?, value: ReadableMap?) {
     if(value != null && view != null) {
@@ -34,19 +31,6 @@ class FasterImageViewManager(private val reactApplicationContext: ReactApplicati
   override fun setRadius(view: FasterImageView?, value: Float) {
     if(view != null) {
       fastImageViewImpl.setRadius(view, value)
-    }
-  }
-  @ReactProp(name="tintColor")
-  override fun setTintColor(view: FasterImageView?, value: String?) {
-    if(value != null && view != null) {
-      fastImageViewImpl.setTintColor(view, value)
-    }
-  }
-
-  @ReactProp(name="resizeMode")
-  override fun setResizeMode(view: FasterImageView?, value: String?) {
-    if(value != null && view != null) {
-      fastImageViewImpl.setResizeMode(view, value)
     }
   }
 }
