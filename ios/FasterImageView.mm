@@ -102,5 +102,15 @@ Class<RCTComponentViewProtocol> FasterImageViewCls(void)
     return FasterImageView.class;
 }
 
+- (std::shared_ptr<const FasterImageViewEventEmitter>)getEventEmitter
+{
+ if (!self->_eventEmitter) {
+   return nullptr;
+ }
+
+ assert(std::dynamic_pointer_cast<FasterImageViewEventEmitter const>(self->_eventEmitter));
+ return std::static_pointer_cast<FasterImageViewEventEmitter const>(self->_eventEmitter);
+}
+
 @end
 #endif
