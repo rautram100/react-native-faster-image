@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FasterImageView } from '@rraut/react-native-faster-image';
+import { FasterImageView } from 'react-native-faster-image';
+import type {
+  onLoadEndEvent,
+  onProgressEvent,
+} from 'react-native-faster-image';
 
 export default function App() {
   return (
@@ -10,8 +14,14 @@ export default function App() {
           uri: 'https://i.ytimg.com/vi_webp/7vNERr6yBXE/maxresdefault.webp',
         }}
         style={styles.image}
-        onProgress={(evt) => {
+        onProgress={(evt: onProgressEvent) => {
           console.log('the event', evt.nativeEvent);
+        }}
+        onLoadEnd={(evt: onLoadEndEvent) => {
+          console.log('the event is ', evt.nativeEvent);
+        }}
+        onError={() => {
+          console.log('error while fetching the image');
         }}
       />
     </View>
