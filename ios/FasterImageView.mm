@@ -75,7 +75,16 @@ using namespace facebook::react;
                     }
                 }
                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    
+                    const auto eventEmitter = [self getEventEmitter];
+                    if(image == nil && eventEmitter) {
+                        eventEmitter->onError({});
+                    }
+                    else {
+                        eventEmitter->onLoadEnd({
+                            .width = image.size.width,
+                            .height = image.size.height
+                        });
+                    }
                 }
                  
                 ];

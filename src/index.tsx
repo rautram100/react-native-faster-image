@@ -1,9 +1,5 @@
-// export { default as FasterImageView } from './FasterImageViewNativeComponent';
-// export * from './FasterImageViewNativeComponent';
 import * as React from 'react';
 import { requireNativeComponent, type ViewProps } from 'react-native';
-
-// const LegacyFasterImageView = requireNativeComponent('LegacyFasterImageView');
 
 const isFabricEnabled: boolean = global.nativeFabricUIManager != null;
 
@@ -22,9 +18,26 @@ export type SourceProps = {
 
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
 
+export interface onLoadEndEvent {
+  nativeEvent: {
+    width: number;
+    height: number;
+  };
+}
+
+export interface onProgressEvent {
+  nativeEvent: {
+    bytesWritten: number;
+    bytesExpected: number;
+  };
+}
+
 export interface FasterImageProps extends ViewProps {
   source: SourceProps;
   radius?: number;
+  onProgress?: (event: onProgressEvent) => void;
+  onLoadEnd?: (event: onLoadEndEvent) => void;
+  onError?: () => void;
 }
 
 const ImageView = isFabricEnabled
@@ -37,6 +50,10 @@ export class FasterImageView extends React.Component<FasterImageProps> {
   }
   render(): React.ReactNode {
     const newProps = { ...this.props };
+    /** This change is required as Codegen C++ to Objective C++ bool data type mapping  gets mismateched to bool and string..
+     * Needs to look at this on depth to simplify the JS api.
+     *
+     */
     if (newProps.source.isGIF === undefined) {
       newProps.source.isGIF = false;
     }

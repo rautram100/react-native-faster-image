@@ -16,4 +16,6 @@ RCT_EXPORT_VIEW_PROPERTY(radius, NSFloat)
 RCT_EXPORT_VIEW_PROPERTY(tintColor, NSString)
 RCT_EXPORT_VIEW_PROPERTY(resizeMode, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onProgress, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLoadEnd, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onError, RCTDirectEventBlock)
 @end

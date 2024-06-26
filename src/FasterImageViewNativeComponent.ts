@@ -22,6 +22,14 @@ type SourceProps = {
 interface NativeProps extends ViewProps {
   source?: SourceProps;
   radius?: Float;
+  onLoadStart?: DirectEventHandler<{}>;
+  onLoadEnd?: DirectEventHandler<
+    Readonly<{
+      height: Float;
+      width: Float;
+    }>
+  >;
+  onError?: DirectEventHandler<{}>;
   onProgress?: DirectEventHandler<
     Readonly<{
       bytesWritten: Int32;
