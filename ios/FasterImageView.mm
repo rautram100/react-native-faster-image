@@ -61,7 +61,24 @@ using namespace facebook::react;
         }
         else if((url && [url scheme] && [url host])) {
             if([tintColor length] == 0) {
-                [_imageView sd_setImageWithURL: url];
+                [_imageView 
+                 sd_setImageWithURL: url
+                 placeholderImage: nil
+                 options: SDWebImageRetryFailed | SDWebImageHandleCookies
+                 progress:  ^(NSInteger receivedSize, NSInteger expectedSize, NSURL* _Nullable targetURL) {
+                    const auto eventEmitter = [self getEventEmitter];
+                    if (eventEmitter) {
+                      eventEmitter->onProgress(FasterImageViewEventEmitter::OnProgress{
+                          .bytesWritten = static_cast<int>(receivedSize),
+                          .bytesExpected = static_cast<int>(expectedSize)
+                      });
+                    }
+                }
+                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    
+                }
+                 
+                ];
             }
             else {
                 [_imageView sd_setImageWithURL: url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
