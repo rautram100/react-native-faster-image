@@ -16,7 +16,7 @@ using namespace facebook::react;
 @end
 
 @implementation FasterImageView {
-    UIImageView *_imageView;
+    SDAnimatedImageView *_imageView;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -29,7 +29,7 @@ using namespace facebook::react;
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps = std::make_shared<const FasterImageViewProps>();
     _props = defaultProps;
-    _imageView = [[UIImageView alloc] init];
+    _imageView = [[SDAnimatedImageView alloc] init];
     _imageView.clipsToBounds = YES;
     _imageView.layer.masksToBounds = YES;
     self.contentView = _imageView;
@@ -47,7 +47,6 @@ using namespace facebook::react;
         (oldViewProps.source.uri != newViewProps.source.uri) ||
         (oldViewProps.source.tintColor != newViewProps.source.tintColor) ||
         (oldViewProps.source.resizeMode != newViewProps.source.resizeMode) ||
-        (oldViewProps.source.isGIF != newViewProps.source.isGIF) ||
         (oldViewProps.source.isBase64 != newViewProps.source.isBase64)
         ) {
         NSString *stringURL = [[NSString alloc] initWithCString: newViewProps.source.uri.c_str() encoding: NSASCIIStringEncoding];
@@ -55,12 +54,7 @@ using namespace facebook::react;
         NSString *tintColor = [[NSString alloc] initWithCString: newViewProps.source.tintColor.c_str() encoding: NSASCIIStringEncoding];
         NSString *resizeMode = [[NSString alloc] initWithCString: newViewProps.source.resizeMode.c_str() encoding: NSASCIIStringEncoding];
         Boolean isBase64 = newViewProps.source.isBase64;
-        Boolean isGIF = newViewProps.source.isGIF;
-        if(isBase64 || isGIF) {
-            [_imageView sd_setImageWithURL: url];
-        }
-        else if((url && [url scheme] && [url host])) {
-            if([tintColor length] == 0) {
+         if((url && [url scheme] && [url host])) {
                 [_imageView 
                  sd_setImageWithURL: url
                  placeholderImage: nil
@@ -80,23 +74,25 @@ using namespace facebook::react;
                         eventEmitter->onError({});
                     }
                     else {
-                        eventEmitter->onLoadEnd({
-                            .width = image.size.width,
-                            .height = image.size.height
-                        });
+                        if(eventEmitter) {
+                            eventEmitter->onLoadEnd({
+                                .width = image.size.width,
+                                .height = image.size.height
+                            });
+                        }
+                        if([tintColor length] != 0) {
+                            UIColor *color = [Utils hexStringToColor: tintColor];
+                            UIImage *newImage = [Utils getImageWithTintColor:image :color];
+                            self-> _imageView.image = newImage;
+                        }
                     }
                 }
                  
                 ];
-            }
-            else {
-                [_imageView sd_setImageWithURL: url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    UIColor *color = [Utils hexStringToColor: tintColor];
-                    UIImage *newImage = [Utils getImageWithTintColor:image :color];
-                    self-> _imageView.image = newImage;
-                }];
-            }
         }
+         else if(isBase64) {
+             [_imageView sd_setImageWithURL: url];
+         }
         else {
             if([tintColor length] == 0) {
                 _imageView.image = [UIImage imageNamed: stringURL];
