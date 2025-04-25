@@ -17,6 +17,7 @@ class FastImageViewImpl(themedReactContext: ReactApplicationContext) {
   public fun setSource(view: FasterImageView, value: ReadableMap) {
     val imageUrl: String? = value.getString("uri")
     requestManager = Glide.with(reactContext)
+    view.background = null
     view.adjustViewBounds = true
     if(URLUtil.isValidUrl(imageUrl)) {
       val isGIF: Boolean = value.getBoolean("isGIF")
@@ -82,7 +83,10 @@ class FastImageViewImpl(themedReactContext: ReactApplicationContext) {
 
   public fun setRadius(view: FasterImageView, value: Float) {
     val radius: Float = value * reactContext.resources.displayMetrics.scaledDensity
+    val strokeWidth = 20
+
    val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder().setAllCornerSizes(radius).build()
+
     view.shapeAppearanceModel = shapeAppearanceModel
   }
 
