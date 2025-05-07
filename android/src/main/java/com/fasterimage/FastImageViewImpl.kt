@@ -1,61 +1,75 @@
 package com.fasterimage
 
+
 import android.graphics.Color
 import android.util.Base64
 import android.webkit.URLUtil
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 
 
 class FastImageViewImpl(themedReactContext: ReactApplicationContext) {
   private val reactContext:ReactApplicationContext = themedReactContext;
-  private lateinit var requestManager: RequestManager
+  private val requestManager: RequestManager = Glide.with(themedReactContext)
+  private lateinit var source: ReadableMap
+  private var radius: Float? = null
 
   public fun setSource(view: FasterImageView, value: ReadableMap) {
-    val imageUrl: String? = value.getString("uri")
-    requestManager = Glide.with(reactContext)
-    view.background = null
+    source = value
+  }
+
+
+  public fun setRadius(view: FasterImageView, value: Float) {
+    radius = value
+  }
+
+  public fun renderImage(view: FasterImageView) {
     view.adjustViewBounds = true
+    val r = (radius?.times(reactContext.resources.displayMetrics.scaledDensity)) ?: 1
+    val imageUrl: String? = source.getString("uri")
+    val isGif: Boolean = source.getBoolean("isGIF")
+    val isBase64 = source.getBoolean("isBase64")
+    val tintColor: String? = source.getString("tintColor")
+    val resizeMode: String? = source.getString("resizeMode")
     if(URLUtil.isValidUrl(imageUrl)) {
-      val isGIF: Boolean = value.getBoolean("isGIF")
-       if(isGIF) {
+      if (isGif) {
         requestManager
           .asGif()
           .load(imageUrl)
+          .transform(CenterInside(), RoundedCorners(r.toInt()))
           .into(view)
       }
       else {
-         requestManager
-           .load(imageUrl)
-           .into(view)
-       }
+        requestManager
+          .load(imageUrl)
+          .transform(CenterInside(), RoundedCorners(r.toInt()))
+          .into(view)
+      }
+    }
+    else if(isBase64) {
+      requestManager
+        .asBitmap()
+        .load(Base64.decode(imageUrl, Base64.DEFAULT))
+        .transform(CenterInside(), RoundedCorners(r.toInt()))
+        .into(view)
     }
     else {
-      val isBase64: Boolean = value.getBoolean("isBase64")
-      if(isBase64) {
-        requestManager
-          .asBitmap()
-          .load(Base64.decode(imageUrl, Base64.DEFAULT))
-          .into(view)
-      }
-      else {
-        val pathUrl: String = "@drawable/$imageUrl"
-        val packageName = reactContext.packageName;
-        val imageResource = reactContext.resources.getIdentifier(pathUrl, null, packageName)
-        view.setImageResource(imageResource)
-      }
+      val pathUrl: String = "@drawable/$imageUrl"
+      val packageName = reactContext.packageName;
+      val imageResource = reactContext.resources.getIdentifier(pathUrl, null, packageName)
+      view.setImageResource(imageResource)
     }
-    val tintColor: String? = value.getString("tintColor")
     if(tintColor != null) {
       view.setColorFilter(Color.parseColor(tintColor))
     }
     else {
       view.clearColorFilter()
     }
-    val resizeMode: String? = value.getString("resizeMode")
     if(resizeMode != null) {
       when (resizeMode) {
         "contain" -> {
@@ -76,19 +90,11 @@ class FastImageViewImpl(themedReactContext: ReactApplicationContext) {
       }
     }
     else {
-      view.scaleType = ImageView.ScaleType.CENTER_CROP
+      view.scaleType = ImageView.ScaleType.FIT_CENTER
     }
+
   }
 
-
-  public fun setRadius(view: FasterImageView, value: Float) {
-    val radius: Float = value * reactContext.resources.displayMetrics.scaledDensity
-    val strokeWidth = 20
-
-   val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder().setAllCornerSizes(radius).build()
-
-    view.shapeAppearanceModel = shapeAppearanceModel
-  }
 
   companion object {
     const val NAME = "LegacyFasterImageView"

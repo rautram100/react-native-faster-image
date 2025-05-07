@@ -19,3 +19,7 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+gradle.startParameter.excludedTaskNames.addAll(
+  gradle.startParameter.taskNames.findAll { it.contains("testClasses") }
+)
