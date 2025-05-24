@@ -1,7 +1,6 @@
+import NativeFasterImage from './NativeFasterImage';
 import * as React from 'react';
-import { requireNativeComponent, type ViewProps } from 'react-native';
-
-const isFabricEnabled: boolean = global.nativeFabricUIManager != null;
+import { type ViewProps } from 'react-native';
 
 export type headersType = {
   Authorization: string;
@@ -40,9 +39,7 @@ export interface FasterImageProps extends ViewProps {
   onError?: () => void;
 }
 
-const ImageView = isFabricEnabled
-  ? require('./FasterImageViewNativeComponent').default
-  : requireNativeComponent<FasterImageProps>('LegacyFasterImageView');
+const ImageView = require('./FasterImageViewNativeComponent').default;
 
 export class FasterImageView extends React.Component<FasterImageProps> {
   constructor(props: FasterImageProps) {
@@ -63,3 +60,5 @@ export class FasterImageView extends React.Component<FasterImageProps> {
     return <ImageView {...newProps} />;
   }
 }
+
+export const FasterImage = NativeFasterImage;

@@ -1,17 +1,24 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { FasterImageView } from 'react-native-faster-image';
+import { Button, StyleSheet, View } from 'react-native';
+import { FasterImageView, FasterImage } from 'react-native-faster-image';
 
 export default function App() {
+  const preload = () => {
+    FasterImage.preload([
+      'https://c8.alamy.com/comp/MR0G79/random-pictures-MR0G79.jpg',
+      'https://plus.unsplash.com/premium_photo-1666901328734-3c6eb9b6b979?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1583430999204-f9595a23469c?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ]);
+  };
   return (
     <View style={styles.container}>
       <FasterImageView
         style={styles.image}
         source={{
-          uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+          resizeMode: 'contain',
+          uri: 'https://plus.unsplash.com/premium_photo-1666901328734-3c6eb9b6b979?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         }}
-        radius={100}
       />
+      <Button title="Preload Images" onPress={preload} />
     </View>
   );
 }

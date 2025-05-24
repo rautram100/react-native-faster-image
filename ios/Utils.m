@@ -1,3 +1,10 @@
+//
+//  Utils.m
+//  FasterImage
+//
+//  Created by Aerion Technologies on 24/05/2025.
+//
+
 #import <Foundation/Foundation.h>
 #import "Utils.h"
 #import <UIKit/UIKit.h>
@@ -8,13 +15,13 @@
 {
     NSString *noHashString = [stringToConvert stringByReplacingOccurrencesOfString:@"#" withString:@""];
     NSScanner *stringScanner = [NSScanner scannerWithString:noHashString];
-    
+
     unsigned hex;
     if (![stringScanner scanHexInt:&hex]) return nil;
     int r = (hex >> 16) & 0xFF;
     int g = (hex >> 8) & 0xFF;
     int b = (hex) & 0xFF;
-    
+
     return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:1.0f];
 }
 

@@ -1,4 +1,4 @@
-package com.fasterimageexample
+package fasterimage.example
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -1,3 +1,10 @@
+//
+//  Utils.h
+//  FasterImage
+//
+//  Created by Aerion Technologies on 24/05/2025.
+//
+
 #ifndef Utils_h
 #define Utils_h
 
