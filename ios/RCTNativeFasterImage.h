@@ -4,6 +4,6 @@
 
 
 
-@interface RCTNativeFasterImage : NSObject<NativeFasterImageSpec>
+@interface RCTNativeFasterImage : NSDictionary<NativeFasterImageSpec>
 
 @end
