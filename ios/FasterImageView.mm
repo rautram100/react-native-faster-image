@@ -93,6 +93,11 @@ using namespace facebook::react;
            else if(isBase64) {
                [_imageView sd_setImageWithURL: url];
            }
+           else if([stringURL containsString:@"/"]) {
+             NSURL *fileURL = [NSURL fileURLWithPath: stringURL];
+             [_imageView sd_setImageWithURL: fileURL];
+             
+           }
           else {
               if([tintColor length] == 0) {
                   _imageView.image = [UIImage imageNamed: stringURL];
