@@ -2,15 +2,19 @@ package com.fasterimage
 
 import android.content.Context
 import android.graphics.Color
+import android.net.Uri
 import android.util.AttributeSet
 import android.util.Base64
 import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.facebook.react.bridge.ReadableMap
 import com.google.android.material.imageview.ShapeableImageView
+import androidx.core.net.toUri
+import java.io.File
 
 
 class FasterImageView : LinearLayout {
@@ -49,6 +53,9 @@ class FasterImageView : LinearLayout {
           .load(imageUrl)
           .into(view)
       }
+    }
+    else if(imageUrl?.contains("/") ?: false) {
+      requestManager.asBitmap().load(File(imageUrl)).into(view)
     }
     else {
       val isBase64: Boolean = value.getBoolean("isBase64")
