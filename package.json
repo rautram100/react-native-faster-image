@@ -1,6 +1,6 @@
 {
   "name": "@rraut/react-native-faster-image",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Package for Faster image in React Native.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
