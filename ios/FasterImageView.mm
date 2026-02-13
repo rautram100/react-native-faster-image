@@ -16,7 +16,7 @@ using namespace facebook::react;
 @end
 
 @implementation FasterImageView {
-  SDAnimatedImageView *_imageView;
+  UIImageView *_imageView;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -29,7 +29,7 @@ using namespace facebook::react;
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps = std::make_shared<const FasterImageViewProps>();
     _props = defaultProps;
-    _imageView = [[SDAnimatedImageView alloc] init];
+    _imageView = [[UIImageView alloc] init];
     _imageView.clipsToBounds = YES;
     _imageView.layer.masksToBounds = YES;
     self.contentView = _imageView;
@@ -94,9 +94,21 @@ using namespace facebook::react;
                [_imageView sd_setImageWithURL: url];
            }
            else if([stringURL containsString:@"/"]) {
-             NSURL *fileURL = [NSURL fileURLWithPath: stringURL];
-             [_imageView sd_setImageWithURL: fileURL];
-             
+             UIImage *image = [UIImage imageWithContentsOfFile: stringURL];
+             self -> _imageView.image = image;
+             if([tintColor length] > 0) {
+               UIColor *color = [Utils hexStringToColor: tintColor];
+               _imageView.tintColor = color;
+             }
+           }
+           else if([stringURL containsString:@"sf:"]) {
+             NSString *sfString = [stringURL substringFromIndex: 3];
+             UIImage *image = [UIImage systemImageNamed: sfString];
+             self -> _imageView.image = image;
+             if([tintColor length] > 0) {
+               UIColor *color = [Utils hexStringToColor: tintColor];
+               _imageView.tintColor = color;
+             }
            }
           else {
               if([tintColor length] == 0) {
