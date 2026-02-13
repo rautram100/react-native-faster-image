@@ -86,6 +86,23 @@ import { FasterImageView } from '@rraut/react-native-faster-image';
 />;
 ```
 
+## SF Symbol support
+
+To add sfsymbol just add the sf: prefix in the uri prop.
+
+```js
+import { FasterImageView } from '@rraut/react-native-faster-image';
+
+// ...
+
+<FasterImageView
+  source={{
+    uri: 'sf:folder.fill',
+  }}
+  style={styles.image}
+/>;
+```
+
 ## Why radius props ?
 
 react-native-faster-image directly exposes the platform specific ImageView rather than the ImageView wrapped inside the UIView. Because of this borderRadius style applied on the ImageView will not work and you have to pass extra radius props. The radius props will apply border radius to all four corners of the image and this library currently doesn't support border radius for indivisual corners for now. This will soon change as we are working on this feature.
@@ -99,7 +116,7 @@ react-native-faster-image directly exposes the platform specific ImageView rathe
 - [ ] Add authorization headers.
 - [ ] Prioritize images.
 - [ ] Image Load/Error/Completed Events
-- [ ] Bridgeless Mode Support
+- [x] Bridgeless Mode Support
 - [x] Preload images.
 - [ ] Animated Image Transition while image loading
 - [ ] BlurHash Support
