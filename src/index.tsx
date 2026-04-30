@@ -34,6 +34,7 @@ export interface onProgressEvent {
 export interface FasterImageProps extends ViewProps {
   source: SourceProps;
   radius?: number;
+  placeHolder?: string;
   onProgress?: (event: onProgressEvent) => void;
   onLoadEnd?: (event: onLoadEndEvent) => void;
   onError?: () => void;

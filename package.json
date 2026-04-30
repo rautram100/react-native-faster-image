@@ -68,11 +68,11 @@
     "@eslint/js": "^9.22.0",
     "@evilmartians/lefthook": "^1.5.0",
     "@react-native-community/cli": "15.0.0-alpha.2",
-    "@react-native/babel-preset": "0.79.2",
-    "@react-native/eslint-config": "^0.78.0",
+    "@react-native/babel-preset": "0.85.2",
+    "@react-native/eslint-config": "^0.85.2",
     "@release-it/conventional-changelog": "^9.0.2",
     "@types/jest": "^29.5.5",
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.2.3",
     "commitlint": "^19.6.1",
     "del-cli": "^5.1.0",
     "eslint": "^9.22.0",
@@ -80,9 +80,9 @@
     "eslint-plugin-prettier": "^5.2.3",
     "jest": "^29.7.0",
     "prettier": "^3.0.3",
-    "react": "19.0.0",
-    "react-native": "0.79.2",
-    "react-native-builder-bob": "^0.40.11",
+    "react": "19.2.3",
+    "react-native": "0.85.2",
+    "react-native-builder-bob": "^0.41.0",
     "release-it": "^17.10.0",
     "turbo": "^1.10.7",
     "typescript": "^5.8.3"
@@ -167,6 +167,6 @@
   "create-react-native-library": {
     "languages": "kotlin-objc",
     "type": "fabric-view",
-    "version": "0.50.3"
+    "version": "0.62.0"
   }
 }
