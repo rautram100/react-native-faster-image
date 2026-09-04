@@ -17,12 +17,12 @@ type SourceProps = {
   isGIF?: boolean;
   tintColor?: string;
   resizeMode?: string;
+  placeHolder?: string;
 };
 
 interface NativeProps extends ViewProps {
   source?: SourceProps;
   radius?: Float;
-  placeHolder?: string;
   onLoadStart?: DirectEventHandler<{}>;
   onLoadEnd?: DirectEventHandler<
     Readonly<{

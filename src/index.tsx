@@ -13,6 +13,7 @@ export type SourceProps = {
   isGIF?: boolean;
   tintColor?: string;
   resizeMode?: ResizeMode;
+  placeHolder?: string;
 };
 
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
@@ -34,7 +35,6 @@ export interface onProgressEvent {
 export interface FasterImageProps extends ViewProps {
   source: SourceProps;
   radius?: number;
-  placeHolder?: string;
   onProgress?: (event: onProgressEvent) => void;
   onLoadEnd?: (event: onLoadEndEvent) => void;
   onError?: () => void;

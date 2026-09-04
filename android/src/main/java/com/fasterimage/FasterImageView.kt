@@ -2,18 +2,15 @@ package com.fasterimage
 
 import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import android.util.AttributeSet
 import android.util.Base64
 import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.facebook.react.bridge.ReadableMap
 import com.google.android.material.imageview.ShapeableImageView
-import androidx.core.net.toUri
 import java.io.File
 
 
@@ -49,6 +46,7 @@ class FasterImageView : LinearLayout {
           .into(view)
       }
       else {
+        val placeHolder: String? = value.getString("placeHolder")
         requestManager
           .load(imageUrl)
           .into(view)
@@ -110,4 +108,5 @@ class FasterImageView : LinearLayout {
     val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder().setAllCornerSizes(radius).build()
     view.shapeAppearanceModel = shapeAppearanceModel
   }
+
 }
