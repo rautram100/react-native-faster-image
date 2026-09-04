@@ -8,9 +8,9 @@ export default function App() {
         style={styles.image}
         source={{
           resizeMode: 'contain',
-          uri: 'https://cdn.pixabay.com/photo/2021/12/12/20/00/play-6865967_1280.jpg',
+          uri: 'https://www.generatormix.com/images/thumbs/random-image-generator.jpg',
+          placeHolder: 'placeholder',
         }}
-        placeHolder="export"
       />
     );
   };

@@ -20,7 +20,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - SDWebImage (~> 5.21.5)
+    - SDWebImage (~> 5.21.7)
     - SDWebImageWebPCoder (~> 0.15.0)
     - Yoga
   - FBLazyVector (0.85.2)
@@ -2026,7 +2026,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  FasterImage: 485a70fea18d27476c8e9655ee6a259eb9ba6649
+  FasterImage: 9f8cf4f72912908d7f698258e52a3f39e8d034f5
   FBLazyVector: 26fd21c75314e101f280d401e97f27d54f3f7064
   hermes-engine: 09516712d2300b95d252095501be64c5a5d44ac3
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
