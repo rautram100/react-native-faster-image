@@ -46,10 +46,22 @@ class FasterImageView : LinearLayout {
           .into(view)
       }
       else {
-        val placeHolder: String? = value.getString("placeHolder")
-        requestManager
-          .load(imageUrl)
-          .into(view)
+        val placeHolderImage: String? = value.getString("placeHolder")
+        if(placeHolderImage != null) {
+          val pathUrl: String = "@drawable/$placeHolderImage"
+          val packageName = context.packageName;
+          val imageResource = context.resources.getIdentifier(pathUrl, null, packageName)
+          requestManager
+            .load(imageUrl)
+            .placeholder(imageResource)
+            .into(view)
+
+        }
+        else {
+          requestManager
+            .load(imageUrl)
+            .into(view)
+        }
       }
     }
     else if(imageUrl?.contains("/") ?: false) {
@@ -89,7 +101,7 @@ class FasterImageView : LinearLayout {
         }
 
         "center" -> {
-          view.scaleType = ImageView.ScaleType.CENTER_INSIDE
+          view.scaleType = ImageView.ScaleType.CENTER_CROP
         }
 
         else -> {
@@ -98,15 +110,14 @@ class FasterImageView : LinearLayout {
       }
     }
     else {
-      view.scaleType = ImageView.ScaleType.FIT_CENTER
+      view.scaleType = ImageView.ScaleType.CENTER_CROP
     }
   }
 
 
   public fun setRadius(value: Float) {
-    val radius: Float = value * context.resources.displayMetrics.scaledDensity
+    val radius: Float = value * context.resources.displayMetrics.density
     val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder().setAllCornerSizes(radius).build()
     view.shapeAppearanceModel = shapeAppearanceModel
   }
-
 }

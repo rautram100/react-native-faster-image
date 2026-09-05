@@ -42,10 +42,7 @@ class FasterImageViewManager : SimpleViewManager<FasterImageView>(),
   }
 
   override fun setRadius(view: FasterImageView?, value: Float) {
-    view?.setRadius(value)
-  }
 
-  override fun setPlaceHolder(view: FasterImageView?, value: String?) {
-    TODO("Not yet implemented")
+    view?.setRadius(value)
   }
 }
