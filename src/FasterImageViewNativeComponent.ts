@@ -1,4 +1,4 @@
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
+import { codegenNativeComponent } from 'react-native';
 import type { ViewProps } from 'react-native';
 import type {
   DirectEventHandler,
@@ -17,6 +17,7 @@ type SourceProps = {
   isGIF?: boolean;
   tintColor?: string;
   resizeMode?: string;
+  placeHolder?: string;
 };
 
 interface NativeProps extends ViewProps {

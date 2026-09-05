@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.private_header_files = "ios/**/*.h"
 
  install_modules_dependencies(s)
-  s.dependency 'SDWebImage', '~> 5.21.5'
+  s.dependency 'SDWebImage', '~> 5.21.7'
   s.dependency 'SDWebImageWebPCoder', '~> 0.15.0'
 end

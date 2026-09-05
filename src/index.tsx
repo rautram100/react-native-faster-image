@@ -13,6 +13,7 @@ export type SourceProps = {
   isGIF?: boolean;
   tintColor?: string;
   resizeMode?: ResizeMode;
+  placeHolder?: string;
 };
 
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';

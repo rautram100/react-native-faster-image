@@ -53,11 +53,12 @@ using namespace facebook::react;
           NSURL *url = [NSURL URLWithString: stringURL];
           NSString *tintColor = [[NSString alloc] initWithCString: newViewProps.source.tintColor.c_str() encoding: NSASCIIStringEncoding];
           NSString *resizeMode = [[NSString alloc] initWithCString: newViewProps.source.resizeMode.c_str() encoding: NSASCIIStringEncoding];
+          NSString *placeHolder = [[NSString alloc] initWithCString: newViewProps.source.placeHolder.c_str() encoding: NSASCIIStringEncoding];
           Boolean isBase64 = newViewProps.source.isBase64;
            if((url && [url scheme] && [url host])) {
                   [_imageView
                    sd_setImageWithURL: url
-                   placeholderImage: nil
+                   placeholderImage: [placeHolder length] > 0 ? [UIImage imageNamed: placeHolder]: nil
                    options: SDWebImageRetryFailed | SDWebImageHandleCookies
                    progress:  ^(NSInteger receivedSize, NSInteger expectedSize, NSURL* _Nullable targetURL) {
                       const auto eventEmitter = [self getEventEmitter];
@@ -76,8 +77,8 @@ using namespace facebook::react;
                       else {
                           if(eventEmitter) {
                               eventEmitter->onLoadEnd({
+                                  .height = image.size.height,
                                   .width = image.size.width,
-                                  .height = image.size.height
                               });
                           }
                           if([tintColor length] != 0) {

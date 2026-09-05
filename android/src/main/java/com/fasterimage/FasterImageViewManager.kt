@@ -42,6 +42,7 @@ class FasterImageViewManager : SimpleViewManager<FasterImageView>(),
   }
 
   override fun setRadius(view: FasterImageView?, value: Float) {
+
     view?.setRadius(value)
   }
 }
